@@ -91,13 +91,6 @@ npm run build   # type-check + production bundle
 
 For live iteration, symlink the project folder into your vault's `.obsidian/plugins/` as `width-wizard`, run `npm run dev`, and use the [Hot Reload](https://github.com/pjeby/hot-reload) plugin.
 
-### Releasing
-
-1. Run `npm version <x.y.z>` (for example `npm version 1.0.1`). This updates `manifest.json` and `versions.json`, then commits and tags. The tag has no `v` prefix, because Obsidian requires the tag to equal the version.
-2. Push the commit and the tag: `git push && git push --tags`.
-3. The *Release* workflow runs the tests and lint, builds the plugin, and attaches `main.js`, `manifest.json` and `styles.css` to a draft GitHub release. Publish the draft.
-4. **First release only:** submit the plugin at [community.obsidian.md](https://community.obsidian.md). Sign in, connect your GitHub account, then **Plugins → New plugin**, enter the repository URL, and submit. An automated review runs; if it reports problems, fix them and publish a new release with a higher version.
-
 ## License
 
 [MIT](LICENSE)

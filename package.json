@@ -1,6 +1,6 @@
 {
   "name": "width-wizard",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Control the line width of your notes and resize table columns by dragging their borders.",
   "main": "main.js",
   "scripts": {
