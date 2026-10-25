@@ -1,0 +1,58 @@
+/* ---- Column resizing -------------------------------------------------- */
+
+/* Tables whose columns have been resized: fixed layout, explicit total width. */
+table.ww-resized {
+  table-layout: fixed !important;
+  width: var(--ww-table-width) !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+table.ww-resized th,
+table.ww-resized td {
+  min-width: 0 !important;
+  max-width: none !important;
+  overflow-wrap: anywhere;
+}
+
+/* Reading view: let a table wider than the page scroll instead of spilling out. */
+.markdown-rendered .el-table:has(> table.ww-resized) {
+  overflow-x: auto;
+}
+
+/* Pointer feedback while hovering or dragging a column border. */
+body.ww-col-resize-hover,
+body.ww-col-resize-hover * {
+  cursor: col-resize !important;
+}
+
+body.ww-resizing,
+body.ww-resizing * {
+  cursor: col-resize !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+/* The line that follows the border you are about to drag, or are dragging. */
+.ww-resize-guide {
+  position: fixed;
+  display: none;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background-color: var(--interactive-accent);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: var(--layer-popover);
+}
+
+.ww-resize-guide.is-visible {
+  display: block;
+}
+
+/* ---- Settings --------------------------------------------------------- */
+
+input.ww-number-input {
+  width: 5.5em;
+  text-align: end;
+}

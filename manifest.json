@@ -1,0 +1,10 @@
+{
+  "id": "width-wizard",
+  "name": "Width Wizard",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Widen the text column of your notes and resize table columns by dragging their borders.",
+  "author": "Ferhat Yurdakul",
+  "authorUrl": "https://github.com/ferhatyurdakul",
+  "isDesktopOnly": false
+}
