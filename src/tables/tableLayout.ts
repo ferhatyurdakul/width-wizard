@@ -8,6 +8,7 @@
 
 export const TABLE_CLASS = "ww-resized";
 export const GROUP_CLASS = "ww-colgroup";
+const SCROLL_CLASS = "ww-table-scroll";
 const TOTAL_WIDTH_VAR = "--ww-table-width";
 
 export function columnCount(table: HTMLTableElement): number {
@@ -24,6 +25,12 @@ export function measureColumns(table: HTMLTableElement): number[] {
 export function borderX(table: HTMLTableElement, column: number): number | null {
   const cell = table.rows[0]?.cells[column];
   return cell ? cell.getBoundingClientRect().right : null;
+}
+
+/** Reading view wraps each table in `.el-table`, which needs to scroll once the table is wider than the page. */
+function scrollWrapper(table: HTMLTableElement): HTMLElement | null {
+  const parent = table.parentElement;
+  return parent?.classList.contains("el-table") ? parent : null;
 }
 
 function findGroup(table: HTMLTableElement): HTMLElement | null {
@@ -52,6 +59,8 @@ export function applyWidths(table: HTMLTableElement, widths: number[]): void {
   });
 
   if (!table.classList.contains(TABLE_CLASS)) table.classList.add(TABLE_CLASS);
+  const wrapper = scrollWrapper(table);
+  if (wrapper && !wrapper.classList.contains(SCROLL_CLASS)) wrapper.classList.add(SCROLL_CLASS);
   const totalValue = `${total}px`;
   if (table.style.getPropertyValue(TOTAL_WIDTH_VAR) !== totalValue) {
     table.style.setProperty(TOTAL_WIDTH_VAR, totalValue);
@@ -62,6 +71,8 @@ export function applyWidths(table: HTMLTableElement, widths: number[]): void {
 export function clearWidths(table: HTMLTableElement): void {
   findGroup(table)?.remove();
   if (table.classList.contains(TABLE_CLASS)) table.classList.remove(TABLE_CLASS);
+  const wrapper = scrollWrapper(table);
+  if (wrapper?.classList.contains(SCROLL_CLASS)) wrapper.classList.remove(SCROLL_CLASS);
   if (table.style.getPropertyValue(TOTAL_WIDTH_VAR)) {
     table.style.removeProperty(TOTAL_WIDTH_VAR);
     if (!table.getAttribute("style")) table.removeAttribute("style");

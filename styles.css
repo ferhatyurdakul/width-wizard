@@ -1,36 +1,47 @@
 /* ---- Column resizing -------------------------------------------------- */
 
-/* Tables whose columns have been resized: fixed layout, explicit total width. */
-table.ww-resized {
-  table-layout: fixed !important;
-  width: var(--ww-table-width) !important;
-  min-width: 0 !important;
-  max-width: none !important;
+/*
+ * Tables whose columns have been resized: fixed layout, explicit total width.
+ * Obsidian gives every cell its minimum and maximum width through these two
+ * variables, so setting them here lets columns shrink below the default 6ch.
+ */
+table.ww-resized,
+.markdown-rendered table.ww-resized {
+  --table-column-min-width: 0px;
+  --table-column-max-width: none;
+  table-layout: fixed;
+  width: var(--ww-table-width);
+  min-width: 0;
+  max-width: none;
 }
 
 table.ww-resized th,
 table.ww-resized td {
-  min-width: 0 !important;
-  max-width: none !important;
   overflow-wrap: anywhere;
 }
 
 /* Reading view: let a table wider than the page scroll instead of spilling out. */
-.markdown-rendered .el-table:has(> table.ww-resized) {
+.el-table.ww-table-scroll {
   overflow-x: auto;
 }
 
-/* Pointer feedback while hovering or dragging a column border. */
+/*
+ * Pointer feedback while hovering or dragging a column border. Live Preview
+ * sets its own cursor on table cells, drag handles and buttons with long
+ * selectors; this one repeats their path so it wins on specificity alone.
+ */
 body.ww-col-resize-hover,
-body.ww-col-resize-hover * {
-  cursor: col-resize !important;
+body.ww-col-resize-hover *,
+body.ww-resizing,
+body.ww-resizing *,
+:is(body.ww-col-resize-hover, body.ww-resizing) .markdown-source-view.mod-cm6 .cm-table-widget :is(th, td, .table-row-drag-handle, .table-col-drag-handle, .table-row-btn, .table-col-btn) {
+  cursor: col-resize;
 }
 
 body.ww-resizing,
 body.ww-resizing * {
-  cursor: col-resize !important;
-  -webkit-user-select: none !important;
-  user-select: none !important;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* The line that follows the border you are about to drag, or are dragging. */
