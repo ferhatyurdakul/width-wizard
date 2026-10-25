@@ -65,12 +65,6 @@ Width Wizard needs Obsidian 1.5.0 or newer. It makes no network requests and col
 1. Open **Settings → Community plugins**. If you see "Restricted mode", turn it off.
 2. Select **Browse**, search for **Width Wizard**, then **Install** and **Enable**.
 
-### With BRAT (to try new versions early)
-
-1. Install and enable the [BRAT](https://github.com/TfTHacker/obsidian42-brat) plugin.
-2. Use BRAT's **Add a beta plugin** command and enter `ferhatyurdakul/width-wizard`.
-3. Enable **Width Wizard** under **Settings → Community plugins**.
-
 ### Manually
 
 1. Download `main.js`, `manifest.json` and `styles.css` from the [latest release](https://github.com/ferhatyurdakul/width-wizard/releases/latest).
